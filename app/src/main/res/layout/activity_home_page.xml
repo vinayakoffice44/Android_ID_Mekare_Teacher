@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_bg"
+    tools:context=".Activity.HomePage">
+    <!-- Top Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+    <!-- middle Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+    <!-- bottom Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <!-- Left Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <!-- Right Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/home_scrren_img"
+        app:layout_constraintBottom_toBottomOf="@id/home_guideline_middle"
+        app:layout_constraintEnd_toEndOf="@id/home_guideline_right"
+        app:layout_constraintStart_toStartOf="@id/home_guideline_left"
+        app:layout_constraintTop_toTopOf="@id/home_guideline_top">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/Home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Start Your Dream\n Journey Today!"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_guideline_middle" />
+
+    <TextView
+        android:id="@+id/Home_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Ride your dream, own the road!"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/home_guideline_right"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@id/home_guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/Home_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home_get_started_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorPrimary"
+        android:drawableEnd="@drawable/ic_forward_arrow"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="10sp"
+        app:layout_constraintBottom_toTopOf="@id/home_guideline_bottom"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@id/home_guideline_left"
+        app:layout_constraintRight_toRightOf="@id/home_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/Home_sub_title"
+        app:layout_constraintVertical_bias="0.486">
+
+    </com.google.android.material.button.MaterialButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

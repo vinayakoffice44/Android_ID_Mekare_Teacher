@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LoginActivity"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/login_bg">
+    <!-- Top Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <!-- Left Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <!-- Right Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+
+    <!-- Top Guideline meddle-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_meddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <!-- Top Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <!-- login text view -->
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="@id/login_guideline_top"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        android:paddingBottom="5dp"
+        app:layout_constraintHorizontal_bias="0.02"
+        />
+
+    <!-- Email Input (Material UI) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_email_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/login_title"
+        android:layout_marginTop="5dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="?attr/colorPrimaryVariant"
+        app:boxStrokeWidth="2dp"
+        android:textColorHint="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email ID"
+            android:textColor="?attr/colorPrimary"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Input (Material UI) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_password_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/login_email_layout"
+        android:layout_marginTop="5dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="?attr/colorPrimaryVariant"
+        app:boxStrokeWidth="2dp"
+        android:textColorHint="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:errorEnabled="true"
+        app:endIconMode="password_toggle"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="?attr/colorPrimary"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/login_forget_password"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="?attr/colorPrimary"
+
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:cornerRadius="10sp"/>
+
+
+
+    <!-- Forget Password -->
+    <TextView
+        android:id="@+id/login_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forget Password"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/login_password_layout"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintBottom_toTopOf="@id/login_button"
+        app:layout_constraintHorizontal_bias="0.98"
+        android:layout_marginBottom="5dp"
+        />
+
+    <!-- Create New Account -->
+    <TextView
+        android:id="@+id/login_sign_up_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Account"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/login_button"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintHorizontal_bias="0.02"
+        android:layout_marginTop="5dp"
+        />
+
+
+
+
+    <!-- Apply Horizontal Chain -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/login_guideline_Horizontal_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

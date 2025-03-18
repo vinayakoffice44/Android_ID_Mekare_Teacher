@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Logout -->
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_svg_power"
+        app:showAsAction="ifRoom" />
+    <!-- Change Profile Image -->
+    <item
+        android:id="@+id/menu_change_profile"
+        android:title="Change Profile Image"
+        android:icon="@drawable/ic_svg_profile_two"
+        app:showAsAction="never" />
+
+
+
+</menu>
