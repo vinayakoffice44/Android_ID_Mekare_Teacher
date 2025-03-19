@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!-- Email Input (Material UI) -->
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/item_add_class_cancel_button"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="  Add Class"
+              android:textSize="18dp"
+              android:textColor="@color/Primary"
+              android:textAlignment="center"
+              android:textStyle="bold"
+              android:padding="8sp"
+              android:background="@color/Secondary"
+              android:drawableEnd="@drawable/ic_svg_cancel"
+              >
+
+          </com.google.android.material.textview.MaterialTextView>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/item_add_class_teacher_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/login_title"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/item_add_class_teacher_nam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Techaer Name"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/item_add_class_teacher_number_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/login_title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10">
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/item_add_class_teacher_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Teacher Phone Number"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Class Name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/item_add_class_class_dropdown_layout"
+                android:layout_weight="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+
+                app:boxBackgroundColor="@color/Secondary"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/Primary"
+                app:errorEnabled="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="@color/Primary"
+                android:hint="Vehicle Model"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/item_add_class_class_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:inputType="none"
+                    android:textColor="@color/Primary"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--Div-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/item_add_class_div_dropdown_layout"
+                android:layout_weight="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+
+                app:boxBackgroundColor="@color/Secondary"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/Primary"
+                app:errorEnabled="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="@color/Primary"
+                android:hint="Vehicle Model"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/item_add_class_div_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:inputType="none"
+                    android:textColor="@color/Primary"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_add_class_add_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Class"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cornerRadius="12dp"
+                android:textSize="18sp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Add Class"
+                android:textSize="14dp"
+                android:textColor="@color/Secondary"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:padding="5sp"
+                android:background="@color/Secondary"
+                android:layout_marginTop="15dp"
+
+                >
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

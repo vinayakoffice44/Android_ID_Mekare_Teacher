@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.id_maker_teacher.R;
+import com.example.id_maker_teacher.Utility.SharedPreferencesHelper;
 import com.google.android.material.button.MaterialButton;
 
 public class HomePage extends AppCompatActivity {
@@ -35,7 +36,14 @@ public class HomePage extends AppCompatActivity {
     }
     private void GetStartedButtonClick() {
         getStartedButton.setOnClickListener(v -> {
-           startActivity(new Intent(this, LoginActivity.class));
+            SharedPreferencesHelper preferences = new SharedPreferencesHelper(this);
+            boolean isLoggedIn = preferences.isLoggedIn();
+            if(isLoggedIn){
+                startActivity(new Intent(this, DashboardActivity.class));
+            }else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+
 
         });
     }

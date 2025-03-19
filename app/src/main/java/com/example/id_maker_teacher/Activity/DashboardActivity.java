@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.id_maker_teacher.Fragment.ClassFragment;
+import com.example.id_maker_teacher.Fragment.ProfileFragment;
 import com.example.id_maker_teacher.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
@@ -35,14 +37,10 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int id) {
 
-                if(id == R.id.home){
-                    fragment = new Fragment();
-                } else if (id == R.id.register) {
-                    fragment = new Fragment();
-                }else if (id == R.id.favorites) {
-                    fragment = new Fragment();
-                }else if (id == R.id.profile) {
-                    fragment =new Fragment();
+                if(id == R.id.register){
+                    fragment = new ClassFragment();
+                } else if (id == R.id.profile) {
+                    fragment =new ProfileFragment();
                 }
                 if (fragment != null) {
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -57,9 +55,9 @@ public class DashboardActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new Fragment())
+                    .replace(R.id.fragment_container, new ClassFragment())
                     .commit();
-            menu.setItemSelected(R.id.home, true); // Fix: Ensure default selection is applied
+            menu.setItemSelected(R.id.register, true); // Fix: Ensure default selection is applied
         }
 
     }

@@ -125,6 +125,36 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
+    <!-- Email Input (Material UI) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_branch_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/login_guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/login_password_layout"
+        android:layout_marginTop="5dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="?attr/colorPrimaryVariant"
+        app:boxStrokeWidth="2dp"
+        android:textColorHint="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_branch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Orgnization Id"
+            android:textColor="?attr/colorPrimary"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
@@ -152,7 +182,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/login_password_layout"
+        app:layout_constraintTop_toBottomOf="@id/login_branch_layout"
         app:layout_constraintStart_toStartOf="@id/login_guideline_left"
         app:layout_constraintEnd_toEndOf="@id/login_guideline_right"
         app:layout_constraintBottom_toTopOf="@id/login_button"

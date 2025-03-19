@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ProfileFragment"
+    android:background="@color/Tertiary">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragment_profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryVariant"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Profile"
+        app:titleTextColor="?attr/colorPrimary"
+
+        app:navigationIconTint="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_profile_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_svg_add">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <!-- School organization name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profile_organization_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_organization_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Orgnization Name"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="none"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- School organization Phone -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profile_organization_phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_organization_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Orgnization Phone Number"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="none"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- School organization web site -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profile_organization_website_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_organization_website"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Orgnization website"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="none"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- School organization Address -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profile_organization_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="?attr/colorPrimaryVariant"
+                app:boxStrokeWidth="2dp"
+                android:textColorHint="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:errorEnabled="true"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_organization_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Orgnization Address"
+                    android:textColor="?attr/colorPrimary"
+                    android:inputType="none"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragment_profile_logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Logout"
+                app:cornerRadius="12dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+
+
+
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

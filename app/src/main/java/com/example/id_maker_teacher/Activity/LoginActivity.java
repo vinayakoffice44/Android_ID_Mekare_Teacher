@@ -1,7 +1,12 @@
 package com.example.id_maker_teacher.Activity;
 
+import static com.example.id_maker_teacher.Utility.AnimationUtility.dismissLoadingDialog;
+import static com.example.id_maker_teacher.Utility.AnimationUtility.showLoadingDialog;
+import static com.example.id_maker_teacher.Utility.ValidationUtility.isValidEmail;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -13,7 +18,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.id_maker_teacher.Model.OrganizationModel;
 import com.example.id_maker_teacher.R;
+import com.example.id_maker_teacher.Utility.ErrorUtility;
+import com.example.id_maker_teacher.Utility.SharedPreferencesHelper;
+import com.example.id_maker_teacher.Utility.ValidationUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -83,7 +92,52 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoginButtonClick() {
         loginButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, OTPActivity.class));
+            String _email = email.getText().toString();
+            String _password = password.getText().toString();
+            if (_email.isEmpty() ) {
+                emailLayout.setError("Email is required");
+                email.requestFocus();
+                return;
+            }
+            if (!isValidEmail(_email)) {
+                emailLayout.setError("Enter The Valid Email");
+                email.requestFocus();
+                return;
+            }
+            if (_password.isEmpty()) {
+                passwordLayout.setError("Password is required");
+                password.requestFocus();
+                return;
+            }
+            showLoadingDialog(LoginActivity.this);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(_email.equals("apv@gmail.com") && _password.equals("123456")){
+                        SharedPreferencesHelper preferences = new SharedPreferencesHelper(LoginActivity.this);
+                        OrganizationModel organization = new OrganizationModel();
+                        organization.setOrganizationId(1);
+                        organization.setOrganizationName("St. Joseph’s International Academy for Advanced Learning");
+                        organization.setOrganizationAddress("Plot No. 56, Near Lotus Chowk, Sector 12, New Delhi - 110001, India");
+                        organization.setOrganizationWebsite("https://www.stjosephsacademy.edu.in");
+                        organization.setOrganizationPhone("98765 43210");
+                        organization.setOrganizationEmail("contact@JIALschool.com");
+                        organization.setOrganizationLogoPath("https://png.pngtree.com/png-vector/20230415/ourmid/pngtree-school-logo-design-template-vector-png-image_6705854.png");
+                        organization.setOrganizationInstructionTitle("Welcome to ABC School");
+                        organization.setOrganizationInstructionDescription("Follow the school rules and guidelines.");
+                        organization.setOrganizationPrincipalSignature("https://www.cpbc.com/uploads/2020/11/Dustin-Johnson-first-name-only-signature-blue.png");
+                        organization.setOrganizationPassword("securepassword");
+                        preferences.saveOrganization(organization);
+                        preferences.setLoginStatus(true);
+                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                    }else {
+                        new ErrorUtility().SimpleError(LoginActivity.this,"invalid Email Id or Password");
+                    }
+                    dismissLoadingDialog();
+                }
+            },3000);
+
+
         });
 
     }
