@@ -13,8 +13,27 @@ public class OrganizationModel {
     private String organizationPrincipalSignature;
     private String organizationPassword;
 
+    private String organizationTemplateId;
+    private String TemplatePhotoShapeId;
+
     // Constructor
     public OrganizationModel() {}
+
+    public String getOrganizationTemplateId() {
+        return organizationTemplateId;
+    }
+
+    public void setOrganizationTemplateId(String organizationTemplateId) {
+        this.organizationTemplateId = organizationTemplateId;
+    }
+
+    public String getTemplatePhotoShapeId() {
+        return TemplatePhotoShapeId;
+    }
+
+    public void setTemplatePhotoShapeId(String templatePhotoShapeId) {
+        TemplatePhotoShapeId = templatePhotoShapeId;
+    }
 
     // Getters and Setters
     public int getOrganizationId() {

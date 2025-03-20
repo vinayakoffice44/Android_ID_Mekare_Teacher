@@ -67,4 +67,8 @@ dependencies {
 
     implementation ("com.itextpdf:itextg:5.5.10");
 
+    // cropin image
+    implementation ("com.github.yalantis:ucrop:2.2.8");
+
+
 }

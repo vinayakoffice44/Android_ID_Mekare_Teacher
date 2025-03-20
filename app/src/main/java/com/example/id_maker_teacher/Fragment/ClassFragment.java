@@ -3,6 +3,7 @@ package com.example.id_maker_teacher.Fragment;
 import static com.example.id_maker_teacher.Utility.AnimationUtility.dismissLoadingDialog;
 import static com.example.id_maker_teacher.Utility.AnimationUtility.showLoadingDialog;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -24,6 +25,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import com.example.id_maker_teacher.Activity.LoginActivity;
+import com.example.id_maker_teacher.Activity.StudentActivity;
 import com.example.id_maker_teacher.Model.ClassModel;
 import com.example.id_maker_teacher.R;
 import com.example.id_maker_teacher.SQL.DatabaseHelper;
@@ -99,6 +101,9 @@ public class ClassFragment extends Fragment {
                 ArrayList<ClassModel> tempList = new ArrayList<>();
                 try {
                     tempList.addAll(databaseHelper.getAllClasses());
+                    if(tempList.isEmpty()){
+
+                    }
                 } catch (Exception e) {
                     handler.post(() -> {
                        dismissLoadingDialog();
@@ -152,9 +157,9 @@ public class ClassFragment extends Fragment {
         ArrayAdapter<String> classNameAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line,ClassNameList );
         ClassDropdown.setAdapter(classNameAdapter);
         ArrayList<String> DivList = new ArrayList<>();
-        DivList.add("A");
-        DivList.add("B");
-        DivList.add("C");
+        DivList.add("Div A");
+        DivList.add("Div B");
+        DivList.add("Div C");
         ArrayAdapter<String> divAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line,DivList );
         DivDropdown.setAdapter(divAdapter);
 
@@ -164,8 +169,15 @@ public class ClassFragment extends Fragment {
         AddClassButton.setOnClickListener(V->{
             String TeacherNameText = TeacherName.getText().toString();
             String TeacherNumberText = TeacherNumber.getText().toString();
+
             String ClassDropdownText = ClassDropdown.getText().toString();
+            if(!ClassDropdownText.isEmpty() && ClassDropdownText.contains(" ")){
+                ClassDropdownText = ClassDropdownText.split(" ")[1];
+            }
             String DivDropdownText = DivDropdown.getText().toString();
+            if(!DivDropdownText.isEmpty() && DivDropdownText.contains(" ")){
+                DivDropdownText = DivDropdownText.split(" ")[1];
+            }
             if(TeacherNameText.isEmpty()){
                 TeacherName.setError("Enter Teacher Name");
                 TeacherName.requestFocus();
@@ -266,8 +278,19 @@ public class ClassFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ClassAdapter.ClassViewHolder holder, int position) {
             ClassModel classModel = classList.get(position);
-            holder.classNameText.setText(classModel.getClassName());
+            holder.classNameText.setText("Class : "+classModel.getClassName());
             holder.divText.setText("DIV : " + classModel.getDiv());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), StudentActivity.class);
+                    intent.putExtra("Class", classModel.getClassName());
+                    intent.putExtra("Div", classModel.getDiv());
+                    intent.putExtra("ClassId", String.valueOf(classModel.getClassId()));
+                    startActivity(intent);
+
+                }
+            });
         }
 
         @Override

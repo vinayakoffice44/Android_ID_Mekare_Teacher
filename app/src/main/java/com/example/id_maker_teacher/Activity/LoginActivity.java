@@ -127,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
                         organization.setOrganizationInstructionDescription("Follow the school rules and guidelines.");
                         organization.setOrganizationPrincipalSignature("https://www.cpbc.com/uploads/2020/11/Dustin-Johnson-first-name-only-signature-blue.png");
                         organization.setOrganizationPassword("securepassword");
+                        organization.setOrganizationTemplateId("1");
+                        organization.setTemplatePhotoShapeId("1");
                         preferences.saveOrganization(organization);
                         preferences.setLoginStatus(true);
                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));

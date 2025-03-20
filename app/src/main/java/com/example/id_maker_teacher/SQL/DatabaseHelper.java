@@ -38,6 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // StudentTable Columns
     private static final String COLUMN_STUDENT_ID = "StudentId";
+    private static final String COLUMN_STUDENT_CLASS_ID = "StudentClassId";
+    private static final String COLUMN_STUDENT_ROLL_NUMBER = "StudentRollNumber";
     private static final String COLUMN_STUDENT_NAME = "StudentFullName";
     private static final String COLUMN_STUDENT_CLASS = "Class";
     private static final String COLUMN_DOB = "DateOfBirth";
@@ -77,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String CREATE_STUDENT_TABLE = "CREATE TABLE " + TABLE_STUDENT + "("
                 + COLUMN_STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " // Auto Increment Added
+                + COLUMN_STUDENT_CLASS_ID + " INTEGER , " // Auto Increment Added
+                + COLUMN_STUDENT_ROLL_NUMBER + " INTEGER, "
                 + COLUMN_STUDENT_NAME + " TEXT, "
                 + COLUMN_STUDENT_CLASS + " TEXT, "
                 + COLUMN_DOB + " TEXT, "
@@ -228,6 +232,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(COLUMN_STUDENT_CLASS_ID, student.getClass_Id());
+        values.put(COLUMN_STUDENT_ROLL_NUMBER, student.getStudentRollNumber());
         values.put(COLUMN_STUDENT_NAME, student.getStudentFullName());
         values.put(COLUMN_STUDENT_CLASS, student.getStudentClass());
         values.put(COLUMN_DOB, student.getDateOfBirth());
@@ -260,6 +266,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(COLUMN_STUDENT_CLASS_ID, student.getClass_Id());
+        values.put(COLUMN_STUDENT_ROLL_NUMBER, student.getStudentRollNumber());
         values.put(COLUMN_STUDENT_NAME, student.getStudentFullName());
         values.put(COLUMN_STUDENT_CLASS, student.getStudentClass());
         values.put(COLUMN_DOB, student.getDateOfBirth());
@@ -280,6 +288,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsUpdated > 0; // Returns true if update was successful
     }
 
+    public boolean updateStudentImage(String path,String studentId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PROFILE_IMAGE, path);
+        int rowsUpdated = db.update(TABLE_STUDENT, values, COLUMN_STUDENT_ID + " = ?",
+                new String[]{String.valueOf(studentId)});
+        db.close();
+        return rowsUpdated > 0; // Returns true if update was successful
+    }
+
     public StudentModel getStudentById(int studentId) {
         SQLiteDatabase db = this.getReadableDatabase();
         StudentModel student = null;
@@ -290,6 +308,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             student = new StudentModel();
             student.setStudentId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ID)));
+            student.setClass_Id(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS_ID)));
+            student.setStudentRollNumber(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ROLL_NUMBER)));
             student.setStudentFullName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_NAME)));
             student.setStudentClass(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS)));
             student.setDateOfBirth(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB)));
@@ -320,8 +340,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 StudentModel student = new StudentModel();
                 student.setStudentId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ID)));
+                student.setClass_Id(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS_ID)));
+                student.setStudentRollNumber(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ROLL_NUMBER)));
                 student.setStudentFullName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_NAME)));
-                student.setStudentClass(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_NAME)));
+                student.setStudentClass(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS)));
+                student.setDateOfBirth(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB)));
+                student.setDiv(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DIV)));
+                student.setBloodGroup(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BLOOD_GROUP)));
+                student.setProfileImage(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PROFILE_IMAGE)));
+                student.setParentOneTitle(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_ONE_TITLE)));
+                student.setParentOneName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_ONE_NAME)));
+                student.setParentOnePhone(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_ONE_PHONE)));
+                student.setParentTwoTitle(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_TWO_TITLE)));
+                student.setParentTwoName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_TWO_NAME)));
+                student.setParentTwoPhone(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PARENT_TWO_PHONE)));
+                student.setHomeAddress(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HOME_ADDRESS)));
+
+                studentList.add(student);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return studentList; // Returns a list of all students
+    }
+    public ArrayList<StudentModel> getAllStudentsUsingClassId(String classId) {
+        ArrayList<StudentModel> studentList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_STUDENT + " WHERE " + COLUMN_STUDENT_CLASS_ID + " = ?", new String[]{classId});
+
+        if (cursor.moveToFirst()) {
+            do {
+                StudentModel student = new StudentModel();
+                student.setStudentId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ID)));
+                student.setClass_Id(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS_ID)));
+                student.setStudentRollNumber(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_ROLL_NUMBER)));
+                student.setStudentFullName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_NAME)));
+                student.setStudentClass(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDENT_CLASS)));
                 student.setDateOfBirth(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB)));
                 student.setDiv(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DIV)));
                 student.setBloodGroup(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BLOOD_GROUP)));
@@ -352,6 +408,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             for (StudentModel student : studentList) {
                 ContentValues values = new ContentValues();
+                values.put(COLUMN_STUDENT_CLASS_ID, student.getClass_Id());
+                values.put(COLUMN_STUDENT_ROLL_NUMBER, student.getStudentRollNumber());
                 values.put(COLUMN_STUDENT_NAME, student.getStudentFullName());
                 values.put(COLUMN_STUDENT_CLASS, student.getStudentClass());
                 values.put(COLUMN_DOB, student.getDateOfBirth());

@@ -3,6 +3,7 @@ package com.example.id_maker_teacher.Model;
 public class StudentModel {
     private int studentId;
     private String studentFullName;
+    private String studentRollNumber;
     private String studentClass;
     private String dateOfBirth;
     private String div;
@@ -16,15 +17,29 @@ public class StudentModel {
     private String parentTwoPhone;
     private String homeAddress;
 
+    String class_Id;
+
     // Constructor
     public StudentModel() {
 
     }
 
-    public StudentModel(int studentId, String studentFullName, String studentClass, String dateOfBirth, String div,
-                   String bloodGroup, String profileImage, String parentOneTitle, String parentOneName,
-                   String parentOnePhone, String parentTwoTitle, String parentTwoName, String parentTwoPhone, String homeAddress) {
+    public StudentModel(int studentId, String studentFullName, String studentRollNumber, String studentClass, String dateOfBirth, String div, String bloodGroup, String profileImage) {
         this.studentId = studentId;
+        this.studentFullName = studentFullName;
+        this.studentRollNumber = studentRollNumber;
+        this.studentClass = studentClass;
+        this.dateOfBirth = dateOfBirth;
+        this.div = div;
+        this.bloodGroup = bloodGroup;
+        this.profileImage = profileImage;
+    }
+
+    public StudentModel(int studentId, String studentRollNumber, String studentFullName , String studentClass, String dateOfBirth, String div,
+                        String bloodGroup, String profileImage, String parentOneTitle, String parentOneName,
+                        String parentOnePhone, String parentTwoTitle, String parentTwoName, String parentTwoPhone, String homeAddress,String class_Id) {
+        this.studentId = studentId;
+        this.studentRollNumber = studentRollNumber;
         this.studentFullName = studentFullName;
         this.studentClass = studentClass;
         this.dateOfBirth = dateOfBirth;
@@ -38,6 +53,23 @@ public class StudentModel {
         this.parentTwoName = parentTwoName;
         this.parentTwoPhone = parentTwoPhone;
         this.homeAddress = homeAddress;
+        this.class_Id = class_Id;
+    }
+
+    public String getClass_Id() {
+        return class_Id;
+    }
+
+    public void setClass_Id(String class_Id) {
+        this.class_Id = class_Id;
+    }
+
+    public String getStudentRollNumber() {
+        return studentRollNumber;
+    }
+
+    public void setStudentRollNumber(String studentRollNumber) {
+        this.studentRollNumber = studentRollNumber;
     }
 
     // Getters and Setters

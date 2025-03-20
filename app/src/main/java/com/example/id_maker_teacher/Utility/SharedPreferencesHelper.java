@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 
 import com.example.id_maker_teacher.Model.OrganizationModel;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 public class SharedPreferencesHelper {
     private static final String PREF_NAME = "OrganizationPrefs";
 
@@ -22,6 +19,8 @@ public class SharedPreferencesHelper {
     private static final String KEY_INSTRUCTION_TITLE = "organization_instruction_title";
     private static final String KEY_INSTRUCTION_DESC = "organization_instruction_desc";
     private static final String KEY_PRINCIPAL_SIGNATURE = "organization_principal_signature";
+    private static final String KEY_ORGANIZATION_TEMPLATE_ID = "organization_template_id";
+    private static final String KEY_TEMPLATE_PHOTO_SHAPE_ID = "organization_photo_shape_id";
     private static final String KEY_PASSWORD = "organization_password";
 
     // Login Status Key
@@ -48,6 +47,8 @@ public class SharedPreferencesHelper {
         editor.putString(KEY_INSTRUCTION_DESC, organization.getOrganizationInstructionDescription());
         editor.putString(KEY_PRINCIPAL_SIGNATURE, organization.getOrganizationPrincipalSignature());
         editor.putString(KEY_PASSWORD, organization.getOrganizationPassword());
+        editor.putString(KEY_ORGANIZATION_TEMPLATE_ID,organization.getOrganizationTemplateId());
+        editor.putString(KEY_TEMPLATE_PHOTO_SHAPE_ID,organization.getTemplatePhotoShapeId());
         editor.apply();
     }
 
@@ -64,6 +65,8 @@ public class SharedPreferencesHelper {
         organization.setOrganizationInstructionTitle(sharedPreferences.getString(KEY_INSTRUCTION_TITLE, ""));
         organization.setOrganizationInstructionDescription(sharedPreferences.getString(KEY_INSTRUCTION_DESC, ""));
         organization.setOrganizationPrincipalSignature(sharedPreferences.getString(KEY_PRINCIPAL_SIGNATURE, ""));
+        organization.setOrganizationTemplateId(sharedPreferences.getString(KEY_ORGANIZATION_TEMPLATE_ID, ""));
+        organization.setTemplatePhotoShapeId(sharedPreferences.getString(KEY_TEMPLATE_PHOTO_SHAPE_ID, ""));
         organization.setOrganizationPassword(sharedPreferences.getString(KEY_PASSWORD, ""));
         return organization;
     }
