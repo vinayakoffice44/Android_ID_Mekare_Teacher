@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.id_maker_teacher.Model.ClassModel;
 import com.example.id_maker_teacher.Model.StudentModel;
 import com.example.id_maker_teacher.R;
@@ -76,6 +77,12 @@ public class StudentActivity extends AppCompatActivity {
         SetUpData();
         AddStudentButtonClick();
 
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        SetUpData();
     }
 
     private void InitTask() {
@@ -162,6 +169,10 @@ public class StudentActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(v -> dialog.dismiss());
 
         btnExcel.setOnClickListener(v -> {
+            Intent intent = new Intent(StudentActivity.this, AddStudentUsingExcleFile.class);
+            intent.putExtra("ClassId", ClassId);
+            startActivity(intent);
+            dialog.dismiss();
 
             dialog.dismiss();
         });
@@ -210,6 +221,9 @@ public class StudentActivity extends AppCompatActivity {
             Glide.with(context)
                     .load(student.getProfileImage()) // URL or drawable
                     .placeholder(R.drawable.ic_svg_profile_two) // Placeholder image
+                    .error(R.drawable.ic_svg_profile_two)
+                    .skipMemoryCache(true)  // Disable memory cache
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(holder.studentImage);
 
             holder.itemView.setOnClickListener(v -> {

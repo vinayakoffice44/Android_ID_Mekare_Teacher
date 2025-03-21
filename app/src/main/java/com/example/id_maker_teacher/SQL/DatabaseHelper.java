@@ -403,8 +403,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Function to add a list of students in a single transaction
     public void addStudentList(ArrayList<StudentModel> studentList) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction(); // Start a transaction for efficiency
-
+        db.beginTransaction();
         try {
             for (StudentModel student : studentList) {
                 ContentValues values = new ContentValues();

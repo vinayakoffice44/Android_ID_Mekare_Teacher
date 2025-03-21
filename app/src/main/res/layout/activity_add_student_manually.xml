@@ -342,10 +342,58 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cornerRadius="12dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp">
 
             </com.google.android.material.button.MaterialButton>
+
+            <!--delete button button-->
+            <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
+                android:id="@+id/add_student_manually_delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cornerRadius="12dp"
+
+                android:layout_marginTop="10dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+
+            <!--View Front Face-->
+            <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
+                android:id="@+id/add_student_manually_view_id_card_front_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Id Card Front Face"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cornerRadius="12dp"
+
+                android:layout_marginTop="10dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <!--view back button-->
+            <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
+                android:id="@+id/add_student_manually_view_id_card_back_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Id Card Back Face"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cornerRadius="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                >
+
+            </com.google.android.material.button.MaterialButton>
+
 
 
 

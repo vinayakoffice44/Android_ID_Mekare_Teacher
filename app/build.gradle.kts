@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.id_maker_teacher"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -67,8 +67,16 @@ dependencies {
 
     implementation ("com.itextpdf:itextg:5.5.10");
 
-    // cropin image
+    // Crop image
     implementation ("com.github.yalantis:ucrop:2.2.8");
+
+    //excel apche light
+    implementation ("org.apache.poi:poi:5.2.3");
+    implementation ("org.apache.poi:poi-ooxml:5.2.3");
+
+
+
+
 
 
 }

@@ -1,8 +1,11 @@
 package com.example.id_maker_teacher.Activity;
 
+import static com.example.id_maker_teacher.Utility.AnimationUtility.showMessageDialog;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -11,6 +14,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
@@ -19,6 +23,7 @@ import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -30,6 +35,7 @@ import com.example.id_maker_teacher.Model.ClassModel;
 import com.example.id_maker_teacher.Model.StudentModel;
 import com.example.id_maker_teacher.R;
 import com.example.id_maker_teacher.SQL.DatabaseHelper;
+import com.example.id_maker_teacher.Utility.AnimationUtility;
 import com.example.id_maker_teacher.Utility.ErrorUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -62,7 +68,7 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
     ArrayAdapter<String> bloodGroupAdapter;
     ArrayList<String> bloodGroupList;
 
-    MaterialButton SaveButton;
+    MaterialButton SaveButton,DeleteButton;
 
     boolean UpdateFlag = false;
     String ClassId;
@@ -70,13 +76,16 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
     Animation animation;
     ImageView studentProfileImage;
 
-
     StudentModel studentModel;
     public File photoFile;
 
     String studentImagePath= null;
 
     DatabaseHelper databaseHelper;
+
+    Toolbar toolbar;
+
+    MaterialButton viewIdFrontFace,viewIdBackFace;
 
 
 
@@ -94,26 +103,89 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         requestPermissions();
         InitTask();
         SetUpIds();
+        ToolbarSetUp();
         SetBloodGroup();
         SetUpAnimation();
         SetUpCalender();
         SetUpPickImage();
         SetSubmitButton();
         SetUpdateDate();
+        DeleteButtonClick();
     }
 
+
+
+
     private void SetUpdateDate() {
-        studentImagePath = studentModel.getProfileImage();
-        studentName.setText(String.valueOf(studentModel.getStudentFullName()));
-        studentRollNumber.setText(studentModel.getStudentRollNumber());
-        studentAddress.setText(studentModel.getHomeAddress());
-        studentDateOfBirth.setText(studentModel.getDateOfBirth());
-        studentParentOneName.setText(studentModel.getParentOneName());
-        studentParentTowName.setText(studentModel.getParentTwoName());
-        studentParentOnePhone.setText(studentModel.getParentOnePhone());
-        studentParentTwoPhone.setText(studentModel.getParentTwoPhone());
-        studentBloodGroup.setText(studentModel.getBloodGroup());
-        showImage(studentImagePath);
+        if(UpdateFlag){
+
+            studentImagePath = studentModel.getProfileImage();
+            studentName.setText(String.valueOf(studentModel.getStudentFullName()));
+            studentRollNumber.setText(studentModel.getStudentRollNumber());
+            studentAddress.setText(studentModel.getHomeAddress());
+            studentDateOfBirth.setText(studentModel.getDateOfBirth());
+            studentParentOneName.setText(studentModel.getParentOneName());
+            studentParentTowName.setText(studentModel.getParentTwoName());
+            studentParentOnePhone.setText(studentModel.getParentOnePhone());
+            studentParentTwoPhone.setText(studentModel.getParentTwoPhone());
+            studentBloodGroup.setText(studentModel.getBloodGroup(),false);
+            showImage(studentImagePath);
+            SaveButton.setText("Update");
+
+            DeleteButton.setVisibility(View.VISIBLE);
+            viewIdFrontFace.setVisibility(View.VISIBLE);
+            viewIdBackFace.setVisibility(View.VISIBLE);
+            toolbar.setTitle("Update Student");
+
+        }
+
+    }
+
+    private void DeleteButtonClick() {
+        DeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddStudentManuallyActivity.this);
+                builder.setTitle("Confirm Delete");
+                builder.setMessage("Are you sure you want to delete?");
+
+                // OK button
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        databaseHelper.deleteStudent(studentModel.getStudentId());
+                        deleteStudentImage(studentModel.getProfileImage());
+                        showMessageDialog(AddStudentManuallyActivity.this, "200", "Student Deleted Successfully", new AnimationUtility.OnOkClickListener() {
+                            @Override
+                            public void onOkClicked() {
+                                finish();
+                            }
+                        });
+                    }
+                });
+
+                // Cancel button
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // Close the dialog
+                    }
+                });
+
+                // Show the dialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+    }
+    public boolean deleteStudentImage(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            return file.delete();
+        }
+        return false;
     }
 
     private void InitTask() {
@@ -173,11 +245,28 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         studentProfileImage = findViewById(R.id.add_student_manually_student_image);
 
         SaveButton = findViewById(R.id.add_student_manually_save_button);
+        DeleteButton = findViewById(R.id.add_student_manually_delete_button);
+        viewIdFrontFace = findViewById(R.id.add_student_manually_view_id_card_front_button);
+        viewIdBackFace = findViewById(R.id.add_student_manually_view_id_card_back_button);
+        toolbar = findViewById(R.id.add_student_manually_toolbar);
 
 
 
 
 
+    }
+
+    private void ToolbarSetUp() {
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Show back button
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed(); // Handle back button click
+        });
     }
 
     private void SetBloodGroup() {
@@ -189,6 +278,7 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         bloodGroupList.add("B-");
         bloodGroupList.add("O-");
         bloodGroupList.add("AB-");
+        bloodGroupList.add("-");
         bloodGroupAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item , bloodGroupList);
         studentBloodGroup.setAdapter(bloodGroupAdapter);
 
@@ -419,6 +509,8 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
     private void showImage(String imagePath) {
         Glide.with(this)
                 .load(new File(imagePath))
+                .placeholder(R.drawable.ic_svg_profile_two)
+                .error(R.drawable.ic_svg_profile_two)
                 .skipMemoryCache(true)  // Disable memory cache
                 .diskCacheStrategy(DiskCacheStrategy.NONE)  // Disable disk cache
                 .into(studentProfileImage);
@@ -526,19 +618,43 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
             studentModel.setHomeAddress(_studentAddress);
             studentModel.setClass_Id(String.valueOf(classModel.getClassId()));
 
-            long result = databaseHelper.addStudent(studentModel);
-            if(result!= -1){
-                String newPath = renameFileWithExtension(studentImagePath, String.valueOf(result));
-                if(newPath!= null){
-                    databaseHelper.updateStudentImage(newPath,String.valueOf(result));
-                    finish();
+            if(UpdateFlag){
+                databaseHelper.updateStudent(studentModel);
+
+                if( studentImagePath.contains("image.jpg")){
+                    String newPath = renameFileWithExtension(studentImagePath, String.valueOf(studentModel.getStudentId()));
+                    if(newPath!= null){
+                        databaseHelper.updateStudentImage(newPath,String.valueOf(studentModel.getStudentId()));
+                        finish();
+                    }else {
+                        new ErrorUtility().SimpleError(this,"Problem Occur in Adding Student photo");
+                    }
                 }else {
-                    new ErrorUtility().SimpleError(this,"Problem Occur in Adding Student photo");
+                    databaseHelper.updateStudentImage(studentImagePath,String.valueOf(studentModel.getStudentId()));
+
                 }
 
+                finish();
+
+
+
             }else {
-                new ErrorUtility().SimpleError(this,"Problem Occur in Adding Student\nTry Again Latter");
+
+                long result = databaseHelper.addStudent(studentModel);
+                if(result!= -1){
+                    String newPath = renameFileWithExtension(studentImagePath, String.valueOf(result));
+                    if(newPath!= null){
+                        databaseHelper.updateStudentImage(newPath,String.valueOf(result));
+                        finish();
+                    }else {
+                        new ErrorUtility().SimpleError(this,"Problem Occur in Adding Student photo");
+                    }
+
+                }else {
+                    new ErrorUtility().SimpleError(this,"Problem Occur in Adding Student\nTry Again Latter");
+                }
             }
+
 
 
 
