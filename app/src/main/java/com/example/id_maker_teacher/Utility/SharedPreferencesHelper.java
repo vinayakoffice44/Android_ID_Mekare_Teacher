@@ -87,4 +87,27 @@ public class SharedPreferencesHelper {
         editor.clear();
         editor.apply();
     }
+
+
+    // Set Organization Logo Path
+    public void setOrganizationLogoPath(String logoPath) {
+        editor.putString(KEY_LOGO_PATH, logoPath);
+        editor.apply();
+    }
+
+    // Get Organization Logo Path
+    public String getOrganizationLogoPath() {
+        return sharedPreferences.getString(KEY_LOGO_PATH, "");
+    }
+
+    // Set Principal Signature Path
+    public void setPrincipalSignaturePath(String signaturePath) {
+        editor.putString(KEY_PRINCIPAL_SIGNATURE, signaturePath);
+        editor.apply();
+    }
+
+    // Get Principal Signature Path
+    public String getPrincipalSignaturePath() {
+        return sharedPreferences.getString(KEY_PRINCIPAL_SIGNATURE, "");
+    }
 }

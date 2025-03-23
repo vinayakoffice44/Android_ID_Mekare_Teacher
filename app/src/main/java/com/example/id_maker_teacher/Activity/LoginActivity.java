@@ -5,8 +5,11 @@ import static com.example.id_maker_teacher.Utility.AnimationUtility.showLoadingD
 import static com.example.id_maker_teacher.Utility.ValidationUtility.isValidEmail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -20,12 +23,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.id_maker_teacher.Model.OrganizationModel;
 import com.example.id_maker_teacher.R;
+import com.example.id_maker_teacher.Utility.DownloadUtility;
 import com.example.id_maker_teacher.Utility.ErrorUtility;
 import com.example.id_maker_teacher.Utility.SharedPreferencesHelper;
 import com.example.id_maker_teacher.Utility.ValidationUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -132,6 +139,21 @@ public class LoginActivity extends AppCompatActivity {
                         preferences.saveOrganization(organization);
                         preferences.setLoginStatus(true);
                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+
+                        ExecutorService executor = Executors.newSingleThreadExecutor();
+                        Handler handler = new Handler(Looper.getMainLooper());
+
+                        executor.execute(() -> {
+
+                            String logo = new DownloadUtility(LoginActivity.this).downloadLogo("https://png.pngtree.com/png-vector/20230415/ourmid/pngtree-school-logo-design-template-vector-png-image_6705854.png");
+                            String sign = new DownloadUtility(LoginActivity.this).downloadSignature("https://www.cpbc.com/uploads/2020/11/Dustin-Johnson-first-name-only-signature-blue.png");
+                            handler.post(() -> {
+                                SharedPreferencesHelper sharedPreferencesHelper1 = new SharedPreferencesHelper(LoginActivity.this);
+                                sharedPreferencesHelper1.setOrganizationLogoPath(logo);
+                                sharedPreferencesHelper1.setPrincipalSignaturePath(sign);
+
+                            });
+                        });
                     }else {
                         new ErrorUtility().SimpleError(LoginActivity.this,"invalid Email Id or Password");
                     }

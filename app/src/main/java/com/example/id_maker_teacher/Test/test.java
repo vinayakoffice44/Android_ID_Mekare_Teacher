@@ -16,6 +16,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.id_maker_teacher.Activity.HomePage;
+import com.example.id_maker_teacher.Model.StudentModel;
 import com.example.id_maker_teacher.R;
 
 
@@ -65,7 +67,11 @@ public class test extends AppCompatActivity {
         Button btnShare = findViewById(R.id.btnShare);
 
 
-        btnGenerate.setOnClickListener(v -> generatePDF());
+        btnGenerate.setOnClickListener(v -> {
+            //generatePDF();
+
+            startActivity(new Intent(test.this, HomePage.class));
+        });
         btnShare.setOnClickListener(v -> {
            /* File classDataDir = new File(getFilesDir(), "ClassData");
             if (!classDataDir.exists()) {
@@ -79,15 +85,25 @@ public class test extends AppCompatActivity {
                 pdfImageView.setImageBitmap(pdfBitmap);
             }*/
 
-            new IdGenreater(test.this).SingeIDGenerate();
+            new IdGenreater(test.this).SingeIDGenerate(new StudentModel(
+                    15,
+                    "Vinayak Arjun Mhavarkar ram kumar ",
+                    "15",
+                    "20",
+                    "06/03/2002",
+                    "A",
+                    "B+",
+                    "/data/user/0/com.example.id_maker_teacher/files/app/images/1/student_images/5.jpg"));
         });
 
         btnShare.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
 
-                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                File file = new File(path, "School_ID_Card.pdf");
+           /*     File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                File file = new File(path, "School_ID_Card.pdf");*/
+                File directory = new File(getFilesDir(), "app/test");
+                File file = new File(directory, "front.pdf");
                 Bitmap pdfBitmap = convertPdfToImage( file);
             if (pdfBitmap != null) {
                 pdfImageView.setImageBitmap(pdfBitmap);

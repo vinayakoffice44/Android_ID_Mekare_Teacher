@@ -38,6 +38,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import com.example.id_maker_teacher.SQL.DatabaseHelper;
+import com.example.id_maker_teacher.Templeate.Design_One;
+import com.example.id_maker_teacher.Test.IdGenreater;
 import com.example.id_maker_teacher.Utility.ErrorUtility;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -135,6 +137,9 @@ public class StudentActivity extends AppCompatActivity {
                     studentList.clear();
                     studentList.addAll(tempList);
                     studentAdapter.notifyDataSetChanged();
+                   // new Design_One(StudentActivity.this).generateAllStudentIDs(studentList);
+                   // new Design_One(StudentActivity.this).generateBackSide(studentList);
+                    new Design_One(StudentActivity.this).generateIDCardsFrontAndBackTogether(studentList);
                 });
             });
 

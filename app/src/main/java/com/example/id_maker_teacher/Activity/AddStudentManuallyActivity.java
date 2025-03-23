@@ -11,9 +11,11 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +37,8 @@ import com.example.id_maker_teacher.Model.ClassModel;
 import com.example.id_maker_teacher.Model.StudentModel;
 import com.example.id_maker_teacher.R;
 import com.example.id_maker_teacher.SQL.DatabaseHelper;
+import com.example.id_maker_teacher.Templeate.Design_One;
+import com.example.id_maker_teacher.Test.IdGenreater;
 import com.example.id_maker_teacher.Utility.AnimationUtility;
 import com.example.id_maker_teacher.Utility.ErrorUtility;
 import com.google.android.material.button.MaterialButton;
@@ -111,6 +115,8 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         SetSubmitButton();
         SetUpdateDate();
         DeleteButtonClick();
+        ViewIdFrontFaceButtonClick();
+        ViewIdBackFaceButtonClick();
     }
 
 
@@ -187,6 +193,63 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         }
         return false;
     }
+    private void ViewIdFrontFaceButtonClick() {
+        viewIdFrontFace.setOnClickListener(v -> {
+            try {
+                new Design_One(AddStudentManuallyActivity.this).FrontPart(studentModel);
+                LayoutInflater inflater = LayoutInflater.from(AddStudentManuallyActivity.this);
+                View idView = inflater.inflate(R.layout.dialog_show_id, null);
+
+                // Find ImageView and set the image
+                ImageView imageView = idView.findViewById(R.id.dialog_show_id);
+                new IdGenreater(AddStudentManuallyActivity.this).ShowId(new File(getFilesDir(), "app/test/front.pdf"),imageView);
+
+                // Create AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddStudentManuallyActivity.this);
+                builder.setView(idView);
+
+                AlertDialog dialog = builder.create();
+
+                // Set transparent background
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                }
+
+                dialog.show();
+            } catch (Error e) {
+                new ErrorUtility().SimpleError(AddStudentManuallyActivity.this, "Some Problem Occur for Generating ID Card");
+            }
+
+
+        });
+    }
+
+    private void ViewIdBackFaceButtonClick() {
+        viewIdBackFace.setOnClickListener(v -> {
+            new Design_One(AddStudentManuallyActivity.this).BackIDGenerate(studentModel);
+            LayoutInflater inflater = LayoutInflater.from(AddStudentManuallyActivity.this);
+            View idView = inflater.inflate(R.layout.dialog_show_id, null);
+
+            // Find ImageView and set the image
+            ImageView imageView = idView.findViewById(R.id.dialog_show_id);
+            new IdGenreater(AddStudentManuallyActivity.this).ShowId(new File(getFilesDir(), "app/test/back.pdf"),imageView);
+
+            // Create AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddStudentManuallyActivity.this);
+            builder.setView(idView);
+
+            AlertDialog dialog = builder.create();
+
+            // Set transparent background
+            if (dialog.getWindow() != null) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }
+
+            dialog.show();
+        });
+
+    }
+
 
     private void InitTask() {
         databaseHelper = new DatabaseHelper(this);
@@ -249,10 +312,6 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
         viewIdFrontFace = findViewById(R.id.add_student_manually_view_id_card_front_button);
         viewIdBackFace = findViewById(R.id.add_student_manually_view_id_card_back_button);
         toolbar = findViewById(R.id.add_student_manually_toolbar);
-
-
-
-
 
     }
 
@@ -480,17 +539,18 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
 
             // Compress the bitmap to 50KB
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            /*ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             int quality = 100; // Start with max quality
             do {
                 outputStream.reset(); // Clear previous data
                 bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
                 quality -= 5; // Reduce quality by 5 each iteration
-            } while (outputStream.toByteArray().length > 50 * 1024 && quality > 10); // Stop when size is <= 50KB or quality is very low
+            } while (outputStream.toByteArray().length > 50 * 1024 && quality > 10);*/
 
             // Write compressed image to file
             FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
-            fileOutputStream.write(outputStream.toByteArray());
+            //fileOutputStream.write(outputStream.toByteArray());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream); // Save with max quality
             fileOutputStream.flush();
             fileOutputStream.close();
             studentImagePath = imageFile.getAbsolutePath();
@@ -500,6 +560,10 @@ public class AddStudentManuallyActivity extends AppCompatActivity {
             showImage(studentImagePath);
         }
     }
+
+
+
+
 
 
 
