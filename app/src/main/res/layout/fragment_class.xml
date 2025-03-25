@@ -20,11 +20,11 @@
           android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
           app:title="Classes"
           app:titleTextColor="?attr/colorPrimary"
-
           app:navigationIconTint="?attr/colorPrimary"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent" />
+          app:layout_constraintEnd_toEndOf="parent"
+          />
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/class_recycle_view"
@@ -41,7 +41,7 @@
       </androidx.recyclerview.widget.RecyclerView>
 
       <com.google.android.material.textview.MaterialTextView
-android:visibility="gone"
+            android:visibility="gone"
           android:id="@+id/class_Instruction"
           android:layout_width="match_parent"
           android:layout_height="0dp"

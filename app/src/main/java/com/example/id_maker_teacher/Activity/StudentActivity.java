@@ -139,7 +139,7 @@ public class StudentActivity extends AppCompatActivity {
                     studentAdapter.notifyDataSetChanged();
                    // new Design_One(StudentActivity.this).generateAllStudentIDs(studentList);
                    // new Design_One(StudentActivity.this).generateBackSide(studentList);
-                    new Design_One(StudentActivity.this).generateIDCardsFrontAndBackTogether(studentList);
+                    //new Design_One(StudentActivity.this).generateIDCardsFrontAndBackTogether(studentList);
                 });
             });
 

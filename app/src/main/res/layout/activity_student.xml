@@ -18,7 +18,8 @@
             app:navigationIconTint="?attr/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:menu="@menu/class_menu"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/student_recycle_view"
